@@ -45,6 +45,8 @@ public class DeserterConfig {
 		public boolean glow = true;
 		/** Bodies get the {@code messages.bodyNameTag} prefix above their head. */
 		public boolean nameTag = true;
+		/** Bodies fall like players do. Off freezes them where the player logged out. */
+		public boolean gravity = true;
 	}
 
 	public static class SafeZones {

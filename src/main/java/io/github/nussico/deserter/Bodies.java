@@ -26,7 +26,7 @@ public final class Bodies {
 	public static final String TEAM_NAME = "deserter_bodies";
 
 	/** What we changed on the player, so it can be undone before they're saved. */
-	private record BodyState(boolean hadGlow, @Nullable String previousTeam) {
+	private record BodyState(boolean hadGlow, boolean hadNoGravity, @Nullable String previousTeam) {
 	}
 
 	private static final Map<ServerPlayer, BodyState> BODIES = new IdentityHashMap<>();
@@ -41,7 +41,7 @@ public final class Bodies {
 	public static void add(ServerPlayer player) {
 		ServerScoreboard scoreboard = player.level().getServer().getScoreboard();
 		PlayerTeam previousTeam = scoreboard.getPlayersTeam(player.getScoreboardName());
-		BODIES.put(player, new BodyState(player.hasGlowingTag(), previousTeam == null ? null : previousTeam.getName()));
+		BODIES.put(player, new BodyState(player.hasGlowingTag(), player.isNoGravity(), previousTeam == null ? null : previousTeam.getName()));
 
 		// Stop whatever the player was doing when they left.
 		player.setLastClientInput(Input.EMPTY);
@@ -52,6 +52,7 @@ public final class Bodies {
 		player.setShiftKeyDown(false);
 
 		if (Deserter.config.body.glow) player.setGlowingTag(true);
+		if (!Deserter.config.body.gravity) player.setNoGravity(true);
 		if (Deserter.config.body.nameTag) scoreboard.addPlayerToTeam(player.getScoreboardName(), bodyTeam(scoreboard));
 	}
 
@@ -131,6 +132,7 @@ public final class Bodies {
 
 	private static void restore(ServerPlayer body, BodyState state) {
 		body.setGlowingTag(state.hadGlow());
+		body.setNoGravity(state.hadNoGravity());
 		ServerScoreboard scoreboard = body.level().getServer().getScoreboard();
 		PlayerTeam current = scoreboard.getPlayersTeam(body.getScoreboardName());
 		if (current == null || !current.getName().equals(TEAM_NAME)) return;

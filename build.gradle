@@ -19,6 +19,16 @@ base {
 	archivesName = project.archives_base_name
 }
 
+fabricApi {
+	configureTests {
+		createSourceSet = true
+		modId = "deserter-test"
+		enableGameTests = true
+		enableClientGameTests = false
+		eula = true
+	}
+}
+
 loom {
 	mods {
 		"deserter" {

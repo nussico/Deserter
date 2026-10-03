@@ -28,6 +28,7 @@ Requires Minecraft 26.3, Fabric Loader 0.19.5+, [Fabric API](https://modrinth.co
 | `display` | `actionbar` | `actionbar`, `bossbar` or `none` |
 | `sounds.*` | | Sounds for entering and leaving combat (sound IDs; empty disables) |
 | `body.glow`, `body.nameTag` | `true` | How bodies are marked |
+| `body.gravity` | `true` | Bodies fall. `false` freezes them where the player logged out |
 | `safeZones.disabledDimensions` | `[]` | e.g. `["minecraft:the_end"]` |
 | `safeZones.zones` | `[]` | Boxes where hits don't start combat, see below |
 | `punishments.memoryDays` | `30` | Only desertions this recent count towards punishments |
@@ -73,7 +74,7 @@ Requires Java 25.
 ./gradlew build
 ```
 
-The jar is written to `build/libs/deserter-<version>.jar`. To start a test server, run `./gradlew runServer`.
+The jar is written to `build/libs/deserter-<version>.jar`. To start a test server, run `./gradlew runServer`. To run the automated tests, run `./gradlew runGameTest`.
 
 ## License
 
