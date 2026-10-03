@@ -1,18 +1,19 @@
 package io.github.nussico.deserter;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.network.DisconnectionDetails;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.ServerScoreboard;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Input;
 import net.minecraft.world.scores.PlayerTeam;
-import net.minecraft.world.scores.TeamColor;
 import org.jspecify.annotations.Nullable;
 
 import java.util.HashSet;
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -146,7 +147,21 @@ public final class Bodies {
 		if (team == null) team = scoreboard.addPlayerTeam(TEAM_NAME);
 		// Refreshed every time so config reloads apply.
 		team.setPlayerPrefix(TextFormat.format(Deserter.config.messages.bodyNameTag));
-		team.setColor(java.util.Optional.of(TeamColor.RED));
+		setRed(team);
 		return team;
+	}
+
+	/** The team color also colors the glow. setColor changed signature in 26.3, so support both. */
+	private static void setRed(PlayerTeam team) {
+		try {
+			team.setColor(ChatFormatting.RED);
+		} catch (NoSuchMethodError newerVersion) {
+			try {
+				Object red = Class.forName("net.minecraft.world.scores.TeamColor").getField("RED").get(null);
+				PlayerTeam.class.getMethod("setColor", Optional.class).invoke(team, Optional.of(red));
+			} catch (ReflectiveOperationException e) {
+				Deserter.LOGGER.warn("Couldn't color the body team", e);
+			}
+		}
 	}
 }

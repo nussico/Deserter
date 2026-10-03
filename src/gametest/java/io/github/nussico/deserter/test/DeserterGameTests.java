@@ -22,6 +22,14 @@ public class DeserterGameTests {
 		checkBody(helper, false);
 	}
 
+	/** Runs the permission check, which uses Fabric's permission API on 26.1.2+ and op levels before. */
+	@GameTest(structure = "fabric-gametest-api-v1:empty")
+	public void nonOpCannotBypass(GameTestHelper helper) {
+		ServerPlayer player = helper.makeMockServerPlayerInLevel();
+		helper.assertTrue(!Deserter.canBypass(player), "A non-op player must not bypass combat");
+		helper.succeed();
+	}
+
 	@GameTest(structure = "fabric-gametest-api-v1:empty", maxTicks = 100)
 	public void bodyTakesKnockback(GameTestHelper helper) {
 		ServerPlayer body = leaveBody(helper);

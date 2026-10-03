@@ -1,6 +1,7 @@
 package io.github.nussico.deserter;
 
 import io.github.nussico.deserter.api.DeserterEvents;
+import io.github.nussico.deserter.compat.PermissionCompat;
 import io.github.nussico.deserter.compat.PlaceholderCompat;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v2.CommandRegistrationCallback;
@@ -102,7 +103,7 @@ public class Deserter implements ModInitializer {
 	}
 
 	public static boolean canBypass(ServerPlayer player) {
-		return player.checkPermission(BYPASS_PERMISSION, PermissionLevel.GAMEMASTERS);
+		return PermissionCompat.check(player, player.permissions(), BYPASS_PERMISSION, PermissionLevel.GAMEMASTERS);
 	}
 
 	private static void onDeath(LivingEntity entity, DamageSource source) {

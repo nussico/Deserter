@@ -5,6 +5,7 @@ import com.mojang.brigadier.arguments.IntegerArgumentType;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import io.github.nussico.deserter.compat.PermissionCompat;
 import net.minecraft.ChatFormatting;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -60,7 +61,7 @@ final class DeserterCommands {
 
 	private static Predicate<CommandSourceStack> permission(String node, PermissionLevel fallback) {
 		Identifier id = Identifier.fromNamespaceAndPath(Deserter.MOD_ID, "command." + node);
-		return source -> source.checkPermission(id, fallback);
+		return source -> PermissionCompat.check(source, source.permissions(), id, fallback);
 	}
 
 	private static int reload(CommandContext<CommandSourceStack> ctx) {

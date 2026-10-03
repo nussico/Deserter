@@ -47,6 +47,8 @@ dependencies {
 
 	// Optional: exposes %deserter:...% placeholders when Text Placeholder API is installed.
 	compileOnly "eu.pb4:placeholder-api:${project.placeholder_api_version}"
+	// Optional: permission nodes on 26.1.2+, where Fabric API ships this module.
+	compileOnly "net.fabricmc.fabric-api:fabric-permission-api-v1:${project.permission_api_version}"
 }
 
 processResources {

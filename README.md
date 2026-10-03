@@ -1,6 +1,6 @@
 # Deserter
 
-A server-side Fabric anti-combat-log mod for Minecraft 26.3. Players don't need to install it.
+A server-side Fabric anti-combat-log mod for Minecraft 26.1 and newer. Players don't need to install it.
 
 ## How it works
 
@@ -14,7 +14,7 @@ A server-side Fabric anti-combat-log mod for Minecraft 26.3. Players don't need 
 
 ## Installation
 
-Requires Minecraft 26.3, Fabric Loader 0.19.5+, [Fabric API](https://modrinth.com/mod/fabric-api) and Java 25. Put the jar in the server's `mods` folder.
+Requires Minecraft 26.1 or newer (one jar for all versions), Fabric Loader 0.19.5+, [Fabric API](https://modrinth.com/mod/fabric-api) and Java 25. Put the jar in the server's `mods` folder.
 
 ## Configuration
 
@@ -54,7 +54,7 @@ A safe zone around spawn:
 | `/deserter list` (who's in combat, and bodies) | `deserter.command.list` | op level 1 |
 | `/deserter stats <player>` | `deserter.command.stats` | op level 1 |
 
-`deserter.bypass` (default op level 2) means the player is never tagged. All permissions work with any Fabric permission mod, such as LuckPerms.
+`deserter.bypass` (default op level 2) means the player is never tagged. All permissions work with any Fabric permission mod, such as LuckPerms, on 26.1.2 and newer. On 26.1 and 26.1.1 only the op levels apply.
 
 Desertions are saved in `<world>/deserter/stats.json` and logged in `<world>/deserter/desertions.log`.
 
