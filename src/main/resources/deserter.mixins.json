@@ -1,0 +1,18 @@
+{
+	"required": true,
+	"package": "io.github.nussico.deserter.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"mixins": [
+		"CombatTrackerMixin",
+		"ConnectionMixin",
+		"PlayerListMixin",
+		"ServerCommonPacketListenerImplMixin",
+		"ServerGamePacketListenerImplMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	},
+	"overwrites": {
+		"requireAnnotations": true
+	}
+}

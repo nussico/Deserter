@@ -1,0 +1,27 @@
+{
+	"schemaVersion": 1,
+	"id": "deserter",
+	"version": "${version}",
+	"name": "Deserter",
+	"description": "Anti combat-log: players who disconnect while in combat are killed and their loot drops for the attacker.",
+	"authors": [
+		"nussico"
+	],
+	"license": "CC0-1.0",
+	"icon": "assets/deserter/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"io.github.nussico.deserter.Deserter"
+		]
+	},
+	"mixins": [
+		"deserter.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
