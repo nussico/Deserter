@@ -11,6 +11,8 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.game.ServerboundPlayerLoadedPacket;
 import net.minecraft.server.level.ServerPlayer;
 
+// makeMockServerPlayerInLevel is deprecated, but its replacement has no connection, so it can't disconnect into a body.
+@SuppressWarnings("removal")
 public class DeserterGameTests {
 	@GameTest(structure = "fabric-gametest-api-v1:empty", maxTicks = 100)
 	public void bodyFalls(GameTestHelper helper) {
