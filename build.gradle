@@ -1,6 +1,7 @@
 plugins {
 	id 'net.fabricmc.fabric-loom' version "${loom_version}"
 	id 'maven-publish'
+	id 'com.modrinth.minotaur' version '2.10.0'
 }
 
 repositories {
@@ -99,3 +100,21 @@ publishing {
 		// retrieving dependencies.
 	}
 }
+
+// ./gradlew modrinth uploads the jar as a new version. Token: modrinth.token in ~/.gradle/gradle.properties.
+modrinth {
+	token = providers.gradleProperty("modrinth.token").orElse("")
+	projectId = "deserter"
+	versionNumber = project.version
+	versionType = "release"
+	uploadFile = jar
+	gameVersions = ["26.1", "26.1.1", "26.1.2", "26.2", "26.3"]
+	loaders = ["fabric"]
+	changelog = providers.gradleProperty("changelog").orElse("See https://github.com/nussico/Deserter/releases")
+	syncBodyFrom = rootProject.file("README.md").text
+	dependencies {
+		required.project "fabric-api"
+		optional.project "placeholder-api"
+	}
+}
+
